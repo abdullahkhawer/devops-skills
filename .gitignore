@@ -1,8 +1,2 @@
 # Ignore macOS system files
 .DS_Store
-
-# Ignore all files in demos directory
-demos/*
-
-# But keep .gif files in demos directory
-!demos/*.gif
