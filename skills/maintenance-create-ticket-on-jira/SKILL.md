@@ -102,13 +102,15 @@ For the **create** path, also write the complete payload to `./tmp/jira-create.j
     "content": [ ... ]
   },
   "additionalAttributes": {
-    "customfield_10121": <story-points>,
-    "customfield_10732": {"value": "Yes"}
+    "<your-story-points-field-id>": <story-points>,
+    "<your-refined-field-id>": {"value": "Yes"}
   }
 }
 ```
 
-Only include `customfield_10121` if Story Points is present. Only include `customfield_10732` if Refined is `Yes`.  
+Replace `<your-story-points-field-id>` and `<your-refined-field-id>` with your Jira instance's actual custom field IDs. To find them, go to **Jira Settings → Issues → Custom Fields**, or use the Jira REST API: `GET /rest/api/3/field`.
+
+Only include the story points field if Story Points is present. Only include the refined field if Refined is `Yes`.  
 Omit `additionalAttributes` entirely if neither field is applicable.
 
 After writing the files, validate each one is well-formed JSON using `jq`:
@@ -205,5 +207,5 @@ rm -f ./tmp/jira-create.json ./tmp/jira-description.json
 - Only create or update tickets when `Maintenance upgrade required: Yes` in the maintenance upgrade file.
 - NEVER delete or transition (close/resolve) issues — only create and update.
 - NEVER read, display, or store the Atlassian API token.
-- If `acli` is not installed or not authenticated, follow the setup instructions in the `jira-and-confluence` skill and ask the user to complete them before proceeding.
+- If `acli` is not installed or not authenticated, follow the setup instructions in the `jira-and-confluence-cli` skill and ask the user to complete them before proceeding.
 - If any `acli` command fails, report the full error to the user and stop — do not retry silently.

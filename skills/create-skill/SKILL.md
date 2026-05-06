@@ -1,11 +1,11 @@
 ---
 name: create-skill
-description: Create a new Claude Code SKILL.md file based on a guided conversation about a task or workflow.
+description: Create a new SKILL.md file based on a guided conversation about a task or workflow.
 ---
 
 # Create Skill
 
-Run this skill when asked to create a new Claude Code skill from a conversation or description of a task.
+Run this skill when asked to create a new skill from a conversation or description of a task.
 
 ## Step 1 — Gather requirements
 
@@ -24,18 +24,18 @@ Wait for the user's answers before proceeding.
 
 Derive a short, lowercase, hyphenated skill name from the task description (e.g. `deploy-lambda`, `check-postgres-health`).
 
-The skill will be created at:
+Ask the user which AI agent they are using, then use the corresponding path:
 
-```
-.claude/skills/<skill-name>/SKILL.md
-```
-
-relative to the root of the current working directory.
+| Agent | Skill path |
+|---|---|
+| Claude Code | `.claude/skills/<skill-name>/SKILL.md` |
+| GitHub Copilot | `.github/skills/<skill-name>/SKILL.md` |
+| Other | `skills/<skill-name>/SKILL.md` |
 
 Create the directory if it does not exist:
 
 ```bash
-mkdir -p .claude/skills/<skill-name>
+mkdir -p <path-to-skill-dir>
 ```
 
 ---
@@ -88,7 +88,7 @@ After writing the file, show the user the generated SKILL.md content and the pat
 
 ## Rules
 
-- Always create the skill under `.claude/skills/<skill-name>/SKILL.md` — never place it elsewhere.
+- Always place the skill in the correct path for the user's AI agent (see Step 2 table).
 - The skill name must be lowercase and hyphenated.
 - Never include credentials, API tokens, or secrets in the generated skill.
 - If the user's description is too vague to produce actionable steps, ask clarifying questions before writing the file.
