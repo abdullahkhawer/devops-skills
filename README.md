@@ -1,6 +1,6 @@
-# ✨ DevOps Skills
+# DevOps Skills
 
-- Founder: [Abdullah Khawer - LinkedIn](https://www.linkedin.com/in/abdullah-khawer)
+- Author: [Abdullah Khawer - LinkedIn](https://www.linkedin.com/in/abdullah-khawer)
 
 # Introduction
 
@@ -306,6 +306,54 @@ This will prompt the chat mode to guide you through any necessary questions or s
 - Ensure you have the necessary permissions and prerequisites before starting
 
 **Note: For more details, refer to the chosen custom chat mode's `.chatmode.md` file.**
+
+# 🛡️ Claude Code Guardrails
+
+The `.claude/` directory contains security guardrails for [Claude Code](https://claude.ai/code) that enforce safe, read-only behaviour by default and prevent destructive or irreversible actions.
+
+| File | Description |
+| ---- | ----------- |
+| [.claude/settings.json](.claude/settings.json) | Hardcoded `deny` and `allow` lists for Bash, Read, and Edit tools, plus pre/post tool-use hooks |
+| [.claude/rules/security.md](.claude/rules/security.md) | Non-negotiable safety rules loaded at every session start |
+| [.claude/rules/aws.md](.claude/rules/aws.md) | AWS-specific rules: credential safety, allowed read-only operations, and blocked destructive/provisioning/IAM commands |
+
+## What is blocked
+
+`settings.json` hard-blocks the following via the `deny` list — Claude Code will never execute these regardless of instructions:
+
+- **AWS destructive operations**: `delete*`, `remove*`, `destroy*`, `terminate*`, `deregister*`, `purge*`, `s3 rm`, `s3 rb`, `cloudformation delete-stack`
+- **AWS provisioning**: `ec2 run-instances`, `ec2 stop-instances`, autoscaling mutations, `ecs update-service`
+- **AWS IAM mutations**: `iam create*`, `iam delete*`, `iam put*`, `iam attach*`
+- **Kubernetes mutations**: `kubectl delete`, `apply`, `create`, `patch`, `scale`, `rollout`, `drain`, `cordon`, `exec`, `edit`
+- **Terraform mutations**: `apply`, `destroy`, `import`, `state rm`, `taint`
+- **Helm mutations**: `install`, `upgrade`, `delete`, `uninstall`, `rollback`
+- **Dangerous git operations**: force push, push to `main`/`master`, `reset --hard`, `clean -f`
+- **System-level danger**: `sudo`, `chmod 777`, `chown root`, `rm -rf` on system paths, `mkfs`, `dd`, pipe-to-shell (`curl | bash`, `wget | sh`)
+- **Credential file reads**: `~/.aws/**`, `~/.kube/**`, `~/.ssh/**`, `.env`, `**/secrets/**`, `**/*credentials*`
+
+## What is always allowed
+
+The `allow` list pre-approves safe, read-only operations without requiring user confirmation:
+
+- **Git read operations**: `log`, `status`, `diff`, `branch`, `show`, `rev-parse`, `remote -v`
+- **AWS read-only**: `describe*`, `list*`, `get*`, `s3 ls`, `sts get-caller-identity`
+- **Kubernetes read-only**: `kubectl get`, `kubectl describe`, `kubectl logs`
+- **Terraform safe operations**: `plan`, `validate`, `fmt`
+- **Test runners**: npm, pnpm, go, mvn, gradle, pytest
+- **File operations**: `Read(./**)`, `Edit(./**)` within the project directory
+
+## Hooks
+
+Two hooks run automatically on every tool use:
+
+- **`PreToolUse` → `validate-bash-command.sh`**: Validates every Bash command before execution
+- **`PostToolUse` → `audit-log.sh`**: Logs every tool use for auditability
+
+## Setup for Claude Code
+
+1. Copy the `.claude/` directory to the root of your project
+2. Ensure the hook scripts exist at `.claude/hooks/validate-bash-command.sh` and `.claude/hooks/audit-log.sh` and are executable
+3. Adjust the `deny`/`allow` lists in `settings.json` to match your project's needs
 
 # 🤝 Contributing
 
