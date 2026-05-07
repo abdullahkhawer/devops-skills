@@ -10,6 +10,8 @@
 
 Each skill builds a specialized AI assistant with targeted knowledge and abilities for your DevOps workflow, significantly cutting development time by eliminating repetitive manual tasks.
 
+CLI-based skills (GitHub, GitLab, Jenkins, Grafana, Prometheus, Jira, Confluence, Slack, AWS, and more) let your AI agent interact with those platforms directly through their native CLI tools or HTTP APIs — **no MCP server required**, whether remote or local.
+
 Once a skill is loaded into your AI agent, it is automatically invoked whenever your prompt contains relevant context that matches the skill's purpose — no explicit command needed.
 
 # 📚 Official Documentation

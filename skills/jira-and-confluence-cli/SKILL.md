@@ -38,8 +38,6 @@ This opens a browser window at `https://api.atlassian.com/oauth2/authorize/...`.
 
 ## Rules
 
-- NEVER target any Atlassian site other than the configured one. If a command or URL references a different site, stop and ask the user to confirm.
-- Always pass `--site <your-site>.atlassian.net` explicitly on every `acli` command to avoid defaulting to a wrong or previously configured site.
 - For list commands that may be paginated, always pass `--limit 100` (or use `--paginate` if supported) to ensure complete results are returned.
 - NEVER run delete commands without explicit user instruction — deletions in Jira and Confluence are irreversible.
 - When constructing JQL or CQL queries, prefer explicit field filters over free-text search to avoid unintended broad matches.
