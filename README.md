@@ -21,7 +21,7 @@ Once a skill is loaded into your AI agent, it is automatically invoked whenever 
 
 # 🚀 Available Skills
 
-## Development Tools
+## 🛠️ Development Tools
 
 - [Code Review](skills/code-review/SKILL.md) — Analyze code changes between two local Git branches and perform a comprehensive code review
 - [Commit Code](skills/commit-code/SKILL.md) — Analyze code changes, prepare conventional commit messages, and commit to a new branch
@@ -30,7 +30,7 @@ Once a skill is loaded into your AI agent, it is automatically invoked whenever 
 - [GitLab CLI](skills/gitlab-cli/SKILL.md) — Perform GitLab operations using the `glab` CLI — issues, merge requests, pipelines, repositories, and MR code reviews
 - [Bitbucket CLI](skills/bitbucket-cli/SKILL.md) — Perform Bitbucket operations using the REST API via `curl` — repositories, pull requests, pipelines, and PR code reviews
 
-## Code Quality & Linting
+## 🧹 Code Quality & Linting
 
 - [Python Linting](skills/python-linting/SKILL.md) — Lint and format Python code using `ruff`, `flake8`, `black`, and `mypy` according to standard conventions
 - [Bash Linting](skills/bash-linting/SKILL.md) — Lint and format Bash/shell scripts using `shellcheck` and `shfmt` according to standard conventions
@@ -38,7 +38,7 @@ Once a skill is loaded into your AI agent, it is automatically invoked whenever 
 - [Dockerfile Linting](skills/dockerfile-linting/SKILL.md) — Lint Dockerfiles using `hadolint` according to standard best practices
 - [Terraform Linting](skills/terraform-linting/SKILL.md) — Lint and format Terraform code using `tflint` and `terraform fmt`/`validate` according to standard conventions
 
-## Infrastructure & DevOps
+## 🏗️ Infrastructure & DevOps
 
 - [Create Terraform Helm Upgrade Plan](skills/create-terraform-helm-upgrade-plan/SKILL.md) — Create a detailed upgrade plan for a Helm release managed by Terraform, comparing chart versions including breaking changes
 - [Maintenance Check AWS EKS](skills/maintenance-check-aws-eks/SKILL.md) — Check available upgrades across an AWS EKS cluster and output a decision file with Jira-formatted tickets
@@ -52,7 +52,7 @@ Once a skill is loaded into your AI agent, it is automatically invoked whenever 
 - [Chef CLI](skills/chef-cli/SKILL.md) — Perform Chef configuration management operations using `knife`/`chef` — nodes, cookbooks, roles, and environments
 - [Jenkins CLI](skills/jenkins-cli/SKILL.md) — Perform Jenkins operations using the `jenkins-cli` JAR — jobs, builds, nodes, and pipeline management
 
-## Cloud Providers
+## ☁️ Cloud Providers
 
 - [AWS CLI](skills/aws-cli/SKILL.md) — Use the correct AWS CLI profile and region when running AWS commands based on the target environment
 - [GCP CLI](skills/gcp-cli/SKILL.md) — Use the correct GCP CLI (`gcloud`) project, account, and region when running Google Cloud commands
@@ -63,7 +63,7 @@ Once a skill is loaded into your AI agent, it is automatically invoked whenever 
 - [Huawei Cloud CLI](skills/huaweicloud-cli/SKILL.md) — Use the correct Huawei Cloud CLI (`hcloud`) profile and region when running Huawei Cloud commands
 - [Hetzner Cloud CLI](skills/hetzner-cli/SKILL.md) — Use the correct Hetzner Cloud CLI (`hcloud`) context when running Hetzner Cloud commands
 
-## Monitoring & Observability
+## 📊 Monitoring & Observability
 
 - [Grafana CLI](skills/grafana-cli/SKILL.md) — Perform Grafana operations using the Grafana HTTP API via `curl` — dashboards, datasources, alerts, and annotations
 - [Prometheus CLI](skills/prometheus-cli/SKILL.md) — Query Prometheus metrics using the HTTP API via `curl` — instant queries, range queries, metadata, and alerts
@@ -84,21 +84,21 @@ Once a skill is loaded into your AI agent, it is automatically invoked whenever 
 - [Sentry CLI](skills/sentry-cli/SKILL.md) — Perform Sentry error tracking operations using `sentry-cli` and the HTTP API — issues, events, and releases
 - [AppDynamics CLI](skills/appdynamics-cli/SKILL.md) — Perform AppDynamics operations using the HTTP API via `curl` — applications, metrics, health rules, and events
 
-## Databases
+## 💾 Databases
 
 - [PostgreSQL CLI](skills/postgresql-cli/SKILL.md) — Perform PostgreSQL operations using the `psql` CLI — inspecting schemas and running read-only queries
 - [MySQL CLI](skills/mysql-cli/SKILL.md) — Perform MySQL operations using the `mysql` CLI — inspecting schemas and running read-only queries
 
-## Project Management
+## 📋 Project Management
 
 - [Jira and Confluence CLI](skills/jira-and-confluence-cli/SKILL.md) — Perform Jira and Confluence operations using the Atlassian CLI (`acli`) — issues, sprints, boards, pages, and spaces
 - [Maintenance Create Ticket on Jira](skills/maintenance-create-ticket-on-jira/SKILL.md) — Create or update a Jira ticket for a workload maintenance upgrade based on maintenance upgrade check files
 
-## Business Platforms
+## 💼 Business Platforms
 
 - [Salesforce CLI](skills/salesforce-cli/SKILL.md) — Perform Salesforce operations using the `sf` CLI — orgs, records, metadata, and deployments
 
-## Collaboration
+## 💬 Collaboration
 
 - [Slack CLI](skills/slack-cli/SKILL.md) — Perform Slack operations using the Slack CLI and Slack Web API — messaging, channels, users, and app management
 - [Microsoft Teams CLI](skills/ms-teams-cli/SKILL.md) — Perform Microsoft Teams operations using the Microsoft Graph API via `curl` — channel messages, teams, and users
@@ -113,13 +113,13 @@ Skills are placed in different directories depending on your AI agent:
 | GitHub Copilot | `.github/skills/<skill-name>/SKILL.md` |
 | Other agents | `skills/<skill-name>/SKILL.md` |
 
-## Setup
+## ⚙️ Setup
 
 1. Copy the desired `SKILL.md` file from the `/skills` directory into the correct path for your AI agent (see table above)
 2. If the skill contains `<placeholder>` values, replace them with your actual configuration
 3. Invoke the skill by name in your AI agent conversation
 
-## Tips for Best Results
+## 🎯 Tips for Best Results
 
 - Review each skill's **Configuration** section and update any placeholder values before use
 - Be specific about your requirements when the skill asks for clarification
@@ -137,7 +137,7 @@ The `.claude/` directory contains security guardrails for [Claude Code](https://
 | [.claude/rules/security.md](.claude/rules/security.md) | Non-negotiable safety rules loaded at every session start |
 | [.claude/rules/aws.md](.claude/rules/aws.md) | AWS-specific rules: credential safety, allowed read-only operations, and blocked destructive/provisioning/IAM commands |
 
-## What is blocked
+## 🚫 What is blocked
 
 `settings.json` hard-blocks the following via the `deny` list — Claude Code will never execute these regardless of instructions:
 
@@ -151,7 +151,7 @@ The `.claude/` directory contains security guardrails for [Claude Code](https://
 - **System-level danger**: `sudo`, `chmod 777`, `chown root`, `rm -rf` on system paths, `mkfs`, `dd`, `ssh`, `scp`, pipe-to-shell (`curl | bash`, `wget | sh`)
 - **Credential file reads**: `~/.aws/**`, `~/.kube/**`, `~/.ssh/**`, `.env`, `**/secrets/**`, `**/*credentials*`
 
-## What is always allowed
+## ✅ What is always allowed
 
 The `allow` list pre-approves safe, read-only operations without requiring user confirmation:
 
@@ -162,7 +162,7 @@ The `allow` list pre-approves safe, read-only operations without requiring user 
 - **Test runners**: npm, npx, pnpm, go, mvn, gradle, pytest
 - **File operations**: `Read(./**)`, `Edit(./**)` within the project directory
 
-## Setup for Claude Code
+## 🔧 Setup for Claude Code
 
 1. Copy the `.claude/` directory to the root of your project
 2. Adjust the `deny`/`allow` lists in `settings.json` to match your project's needs
@@ -170,7 +170,7 @@ The `allow` list pre-approves safe, read-only operations without requiring user 
 
 # 🔍 Skills in Detail
 
-## Development Tools
+## 🛠️ Development Tools
 
 ### Code Review
 
@@ -228,7 +228,7 @@ This skill helps you perform Bitbucket operations using the HTTP API:
 - **PR Code Review**: Fetches PR diffs and performs a full code review when given a PR URL or ID
 - **Basic Auth via App Password**: Reads credentials from a token file — never exposes them
 
-## Code Quality & Linting
+## 🧹 Code Quality & Linting
 
 ### Python Linting
 
@@ -271,7 +271,7 @@ This skill lints and formats Terraform code:
 - **Check-First Workflow**: Always runs in check/diff mode before applying any auto-fix
 - **Security-Aware**: Flags hardcoded secret-looking strings regardless of linter configuration
 
-## Infrastructure & DevOps
+## 🏗️ Infrastructure & DevOps
 
 ### Create Terraform Helm Upgrade Plan
 
@@ -364,7 +364,7 @@ This skill helps you manage Jenkins instances via the `jenkins-cli` JAR:
 - **Node & View Management**: Manage agents, views, and configuration
 - **Multi-Instance Support**: Configure multiple Jenkins environments (prod/staging)
 
-## Cloud Providers
+## ☁️ Cloud Providers
 
 ### AWS CLI
 
@@ -431,7 +431,7 @@ This skill ensures Hetzner Cloud `hcloud` commands always use the correct contex
 - **Environment Awareness**: Distinguishes between production and staging/non-prod contexts
 - **Destructive-Action-Safe**: Never deletes servers, volumes, or firewalls without explicit approval
 
-## Monitoring & Observability
+## 📊 Monitoring & Observability
 
 ### Grafana CLI
 
@@ -577,7 +577,7 @@ This skill helps you query AppDynamics via the HTTP API:
 - **Health Rule Inspection**: List health rule violations and events
 - **OAuth-Aware**: Fetches a fresh short-lived bearer token per session rather than caching it
 
-## Databases
+## 💾 Databases
 
 ### PostgreSQL CLI
 
@@ -595,7 +595,7 @@ This skill helps you inspect MySQL databases via the `mysql` CLI:
 - **Connection-String Safety**: Always uses `--defaults-group-suffix` backed by `~/.my.cnf`, never raw credentials on the command line
 - **Row-Count-Before-Mutate**: Always shows the equivalent `SELECT` before any `UPDATE`/`DELETE`
 
-## Project Management
+## 📋 Project Management
 
 ### Jira and Confluence CLI
 
@@ -614,7 +614,7 @@ This skill creates or updates Jira maintenance upgrade tickets:
 - **ADF Formatting**: Converts Markdown descriptions to Atlassian Document Format automatically
 - **Create or Update**: Detects existing open tickets and updates them instead of duplicating
 
-## Business Platforms
+## 💼 Business Platforms
 
 ### Salesforce CLI
 
@@ -624,7 +624,7 @@ This skill helps you perform Salesforce operations using the `sf` CLI:
 - **Metadata Retrieval**: Retrieve and inspect Apex classes and other metadata
 - **Org Enforcement**: Always passes `--target-org` explicitly to avoid targeting the wrong org
 
-## Collaboration
+## 💬 Collaboration
 
 ### Slack CLI
 
@@ -651,7 +651,7 @@ Contributions are welcome! If you have a skill you'd like to share:
 3. Update this README.md to include your contribution in the appropriate category section
 4. Submit a pull request
 
-## Skill Guidelines
+## 📖 Skill Guidelines
 
 - Use descriptive names and clear descriptions
 - Include a **Configuration** section for any values the user must customize
