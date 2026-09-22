@@ -26,10 +26,9 @@ Once a skill is loaded into your AI agent, it is automatically invoked whenever 
 | [Code Review](skills/code-review/SKILL.md) | Analyze code changes between two local Git branches and perform a comprehensive code review | Development Tools |
 | [Commit Code](skills/commit-code/SKILL.md) | Analyze code changes, prepare conventional commit messages, and commit to a new branch | Development Tools |
 | [Create Dockerfile](skills/create-dockerfile/SKILL.md) | Create optimized, secure, production-ready Dockerfiles based on user requirements and application context | Development Tools |
-| [Create Skill](skills/create-skill/SKILL.md) | Create a new `SKILL.md` file based on a guided conversation about a task or workflow | Development Tools |
 | [GitHub CLI](skills/github-cli/SKILL.md) | Perform GitHub operations using the `gh` CLI — issues, pull requests, pipelines, repositories, and PR code reviews | Development Tools |
 | [GitLab CLI](skills/gitlab-cli/SKILL.md) | Perform GitLab operations using the `glab` CLI — issues, merge requests, pipelines, repositories, and MR code reviews | Development Tools |
-| [AWS CLI](skills/aws-cli/SKILL.md) | Use the correct AWS CLI profile when running AWS commands based on the target environment | Infrastructure & DevOps |
+| [AWS CLI](skills/aws-cli/SKILL.md) | Use the correct AWS CLI profile and region when running AWS commands based on the target environment | Infrastructure & DevOps |
 | [Create Terraform Helm Upgrade Plan](skills/create-terraform-helm-upgrade-plan/SKILL.md) | Create a detailed upgrade plan for a Helm release managed by Terraform, comparing chart versions including breaking changes | Infrastructure & DevOps |
 | [Maintenance Check AWS EKS](skills/maintenance-check-aws-eks/SKILL.md) | Check available upgrades across an AWS EKS cluster and output a decision file with Jira-formatted tickets | Infrastructure & DevOps |
 | [Jenkins CLI](skills/jenkins-cli/SKILL.md) | Perform Jenkins operations using the `jenkins-cli` JAR — jobs, builds, nodes, and pipeline management | CI/CD |
@@ -122,7 +121,7 @@ This skill helps you perform comprehensive code reviews by analyzing changes bet
 This skill helps you automate your Git workflow by analyzing code changes and creating proper commits:
 
 - **Automatic Code Analysis**: Analyzes all uncommitted changes to understand the scope and impact
-- **Conventional Commits**: Determines the appropriate conventional commit type based on code changes
+- **Conventional Commits**: Determines the appropriate conventional commit type based on code changes, with no scope, based on established examples
 - **Branch Management**: Creates new branches following Git best practices
 - **Quality Checks**: Optionally runs pre-commit hooks and Terraform formatting before committing
 - **Automated Workflow**: Handles the complete Git workflow from branch creation to pushing changes
@@ -136,15 +135,6 @@ This skill helps you create optimized, secure, and production-ready Dockerfiles:
 - **Size Optimization**: Creates minimal container images through multi-stage builds
 - **Security Focus**: Implements security best practices including non-root users
 - **Technology Detection**: Automatically detects your application stack from project files
-
-## Create Skill
-
-This meta-skill helps you create new skills through a guided conversation:
-
-- **Interactive Creation**: Walks you through a two-question conversation to define your skill requirements
-- **Agent-Aware**: Asks which AI agent you are using and places the file in the correct directory (`.claude/skills/`, `.github/skills/`, or `skills/`)
-- **Template Generation**: Automatically generates properly formatted `SKILL.md` files
-- **Best Practices**: Ensures your skill follows established conventions and formatting
 
 ## GitHub CLI
 
@@ -165,11 +155,12 @@ This skill helps you perform GitLab operations using the `glab` CLI:
 
 ## AWS CLI
 
-This skill ensures AWS CLI commands always use the correct profile:
+This skill ensures AWS CLI commands always use the correct profile and region:
 
-- **Profile Enforcement**: Always passes `--profile` explicitly to avoid using the wrong account
-- **Environment Awareness**: Distinguishes between production and staging/non-prod profiles
-- **Configurable**: Update the profile map once with your AWS profile names
+- **Profile & Region Enforcement**: Always passes `--profile` and `--region` explicitly to avoid using the wrong account or location
+- **Environment Awareness**: Distinguishes between production, staging/non-prod, and sandbox/dev profiles
+- **Configurable**: Update the profile and default region map once with your AWS profile names
+- **Identity Verification**: Falls back to `aws sts get-caller-identity` when it's unclear which account a profile belongs to
 
 ## Create Terraform Helm Upgrade Plan
 
@@ -220,6 +211,7 @@ This skill helps you manage Jira and Confluence using the Atlassian CLI (`acli`)
 
 - **Jira Operations**: Create, update, and search issues; manage sprints and boards
 - **Confluence Operations**: Create and update pages; manage spaces
+- **Documented Command Structure**: Lists common `acli jira`/`acli confluence` subcommands and ready-to-use examples
 - **Safe by Default**: Never deletes issues or pages without explicit user instruction
 
 ## Maintenance Create Ticket on Jira

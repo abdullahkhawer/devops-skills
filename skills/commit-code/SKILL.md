@@ -78,6 +78,8 @@ git commit -m "<TYPE>: <COMMIT_MESSAGE>"
 - Single line only — no multi-line messages.
 - Must be descriptive and mention all relevant changes.
 - First letter of `<COMMIT_MESSAGE>` must be capitalized.
+- NEVER include a scope — do NOT use `<TYPE>(scope): ...` format, even if a Jira ticket or branch name is provided.
+- Examples: `fix: Fix memory leak in runner cleanup`, `feat: Add retry logic for failed jobs`, `feat!: Drop support for Node 16`
 - Reference: https://www.conventionalcommits.org/en/v1.0.0/
 
 ### Conventional commit types
